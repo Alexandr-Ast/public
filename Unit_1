@@ -15,57 +15,57 @@ __________________________________________________________________
 
 Работа с консолью:
 
-- Переходим в режим root
+1. Переходим в режим root
 sudo -s
 
-- Обновляем список пакетов и сами пакеты
+2. Обновляем список пакетов и сами пакеты
 apt update
 apt upgrade -y
 
-- Обновляем прошивку
+3. Обновляем прошивку
 rpi-update
 
-- Устанавливаем необходимые для работы пакеты
+4. Устанавливаем необходимые для работы пакеты
 apt-get install -y jq wget curl udisks2 apparmor-utils libglib2.0-bin network-manager dbus systemd-journal-remote
 
-- Запускаем Network Manager
+5. Запускаем Network Manager
 systemctl start NetworkManager
 systemctl enable NetworkManager
 
-- Приложение для настройки -
+6. Приложение для настройки -
 sudo raspi-config
 
 Переходим по пути:
 5 Localisation Options / I1 Change Locale - ищем и выбираем локаль ru_RU.UTF-8 UTF-8
 5 Localisation Options / I2 Change Timezone - ищем и выбираем часовой пояс
 
-- Дополнительные настройки
+7. Дополнительные настройки
 nano /boot/cmdline.txt
 В конец файла вставляем systemd.unified_cgroup_hierarchy=false lsm=apparmor
 (Ctrl X - для выхода, Y для сохранения изменений)
 
-- Устанавливаем скрипт управления кулером (для тех кто использует корпус Argon ONE M.2)
+8. Устанавливаем скрипт управления кулером (для тех кто использует корпус Argon ONE M.2)
 curl https://download.argon40.com/argon1.sh | bash
 Настраиваем пороги включения кулера
 argonone-config
 
-- Перезагружаемся
+9. Перезагружаемся
 sudo reboot
 
-- Устанавливаем docker
+10. Устанавливаем docker
 sudo curl -fsSL get.docker.com | sh
 
-- Добавляем пользователя в группу docker
+11. Добавляем пользователя в группу docker
 sudo gpasswd -a $USER docker
 newgrp docker
 
-- Установка OS-Agent (Ссылка на актуальные версии - https://github.com/home-assistant/os-agent/releases/tag/1.4.1)
+12. Установка OS-Agent (Ссылка на актуальные версии - https://github.com/home-assistant/os-agent/releases/tag/1.4.1)
 Загружаем (номер меняем на актуальный) 
 wget https://github.com/home-assistant/os-agent/releases/download/1.4.1/os-agent_1.4.1_linux_aarch64.deb 
 Устанавливаем 
 sudo dpkg -i os-agent_1.4.1_linux_aarch64.deb
 
-- Устанавливаем Home Assisistant Supervised
+13. Устанавливаем Home Assisistant Supervised
 Загружаем
 wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
 Устанавливаем 
